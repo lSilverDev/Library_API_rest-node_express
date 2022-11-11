@@ -76,6 +76,20 @@ class BookController{
             }
         )
     }
+
+    static getBooksByPubCompany = (request, response) => {
+        const pubCompany = request.params.pubCompany;
+
+        books.find({"pubCompany": pubCompany}, {}, (err, books) => {
+            if(err){
+                response.status(400).send({
+                    message: "Error: " + err.message + " book not found",
+                });
+            } else {
+                response.status(200).send(books);
+            }
+        })
+    }
     
 }
 
